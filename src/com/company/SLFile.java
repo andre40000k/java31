@@ -50,12 +50,12 @@ public class SLFile {
         FileWriter fw = new FileWriter(filename);
         BufferedWriter bw = new BufferedWriter(fw);
 
-        for (Triangle triangle1 : triangle) {
+        /*for (Triangle triangle1 : triangle) {
             n++;
             if(triangle1.getArea() != 0 ) {
                 try {
                     bw.write("Triangle " + n + "\n{" + "\n" +
-                            "side1 = " + triangle1.getSide1() + "\n" +
+                            "side1 = " + String.valueOf(triangle1.getSide1()) + "\n" +
                             "side2 = " + triangle1.getSide2() + "\n" +
                             "side3 = " + triangle1.getSide3() + "\n" +
                             "perimeter =" + triangle1.getPerimeter() + "\n" +
@@ -70,7 +70,19 @@ public class SLFile {
                 }
             }
             i++;
+        }*/
+
+        for (Triangle triangle1 : triangle) {
+            try {
+                bw.write(/*"Triangle " + */String.valueOf(triangle1.getSide1()) + " " + String.valueOf(triangle1.getSide2()) + " " + String.valueOf(triangle1.getSide3()));
+                bw.write(System.lineSeparator());
+
+            } catch (IOException e) {
+                System.out.println("Error" + e);
+            }
         }
+
+
         bw.close();
         fw.close();
     }
@@ -90,8 +102,8 @@ public class SLFile {
         FileWriter os = new FileWriter(filename);
         BufferedWriter bw = new BufferedWriter(os);
         bw.write(JSON.toJSONString(triangle));
-        bw.write("\n");
-        bw.write(JSON.toJSONString(angle));
+        /*bw.write("\n");
+        bw.write(JSON.toJSONString(angle));*/
         bw.close();
         os.close();
     }
@@ -105,12 +117,13 @@ public class SLFile {
         ArrayList<JSONObject> JSONlist = JSON.parseObject(scanner.nextLine(), ArrayList.class);
         for (JSONObject st : JSONlist) {
             triangle.add(new Triangle(st.getDouble("side1"), st.getDouble("side2"),st.getDouble("side3")));
+            angle.add(new Angle(st.getDouble("side1"), st.getDouble("side2"),st.getDouble("side3")));
         }
 
-        JSONlist = JSON.parseObject(scanner.nextLine(), ArrayList.class);
+        /*JSONlist = JSON.parseObject(scanner.nextLine(), ArrayList.class);
         for (JSONObject st : JSONlist) {
             angle.add(new Angle(st.getDouble("angle1"), st.getDouble("angle2"),st.getDouble("angle3")));
-        }
+        }*/
 
         scanner.close();
         fr.close();

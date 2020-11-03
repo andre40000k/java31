@@ -28,16 +28,21 @@ public class Main {
         SLFile slfile = new SLFile();
 
         slfile.save("save.txt",fg.triangle, fg.angle);
-        fg.clear();
+        /*fg.clear();*/
         slfile.read("save.txt",fg.triangle,fg.angle);
 
         slfile.serielize("save_serialize.txt",fg.triangle, fg.angle);
-        fg.clear();
+        /*fg.clear();*/
         fg = slfile.deserialize("save_serialize.txt",fg.triangle, fg.angle);
+        System.out.println(fg.triangle.toString());
+        System.out.println(fg.angle.toString());
 
         slfile.serializeFastjson("figure_json.json", fg.triangle, fg.angle);
         fg.clear();
         fg = slfile.deserializeFastjson("figure_json.json", fg.triangle, fg.angle);
+
+        System.out.println(fg.triangle.toString());
+        System.out.println(fg.angle.toString());
     }
 
     public static String Aveequequilater(final ArrayList<Triangle> triangle,  ArrayList<Angle> angle )
